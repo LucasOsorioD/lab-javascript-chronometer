@@ -5,34 +5,39 @@ class Chronometer {
   }
 
   start(callback) {
-    setInterval (() => {
-      this.currentTime++
-    }, 1000)
+    this.intervalId = setInterval (() => {
+      this.currentTime++;
+    }, 1000);
   }
 
   getMinutes() {
-    return Math.floor(setInterval % 60)
+    return Math.floor(this.currentTime / 60)
   }
 
   getSeconds() {
-    
+    return Math.floor(this.currentTime % 60)
   }
 
   computeTwoDigitNumber(value) {
-    // ... your code goes here
+    if (value < 10) {
+    return `0${value}`
+    };
+    return value.toString();
   }
 
   stop() {
-    // ... your code goes here
+    clearInterval(this.intervalId)
   }
 
   reset() {
-    // ... your code goes here
+    this.currentTime = 0;
   }
 
   split() {
-    // ... your code goes here
-  }
+   const minutos = this.getMinutes();
+   const segundos = this.getSeconds();
+   return `${this.computeTwoDigitNumber(minutos)}:${this.computeTwoDigitNumber(segundos)}`
+  };
 }
 
 // The following is required to make unit tests work.
